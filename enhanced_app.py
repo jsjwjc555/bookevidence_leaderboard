@@ -263,7 +263,7 @@ def render_image_percent(image_path: str, percent: int = 60) -> None:
 def initialize_session_state():
     """Initialize session state."""
     if 'dataset_manager' not in st.session_state:
-        data_dir = resolve_data_dir("/Users/chengyihao/Documents/vscode-python/web_leaderboard/BookEvidenceQA_v4")
+        data_dir = resolve_data_dir(os.path.join(BASE_DIR, "BookEvidenceQA_v4"))
         st.session_state.dataset_manager = DatasetManager(data_dir)
     
     if 'leaderboard_manager' not in st.session_state:
