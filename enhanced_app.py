@@ -858,6 +858,9 @@ def show_leaderboard_page():
             if not df.empty:
                 df.sort_values("Trust_score", ascending=False, inplace=True)
                 df.reset_index(drop=True, inplace=True)
+                numeric_cols = df.select_dtypes(include=["number"]).columns
+                if len(numeric_cols) > 0:
+                    df[numeric_cols] = df[numeric_cols].round(2)
 
         st.markdown("###  Training-free Methods")
         if training_free_df.empty:

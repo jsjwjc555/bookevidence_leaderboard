@@ -849,7 +849,7 @@ def show_leaderboard_page():
         numeric_cols = ["reject_f1", "answered_str_em", "answered_citation_f1", "trust_score"]
         for col in numeric_cols:
             if col in df.columns:
-                df[col] = df[col].round(3)
+                df[col] = df[col].round(2)
         
         # 显示排行榜标题
         st.markdown(f"### 📊 {dataset_tab} 排行榜")
