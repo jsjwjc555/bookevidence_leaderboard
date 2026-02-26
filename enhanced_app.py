@@ -320,24 +320,6 @@ def show_home_page():
     """)
 
     st.markdown("###  Dataset Overview")
-    domains = st.session_state.dataset_manager.get_domains()
-    if domains:
-        overview_data = []
-        for domain in domains:
-            stats = st.session_state.dataset_manager.get_dataset_stats(domain)
-            overview_data.append({
-                "Domain": domain.title(),
-                "Sample Count": stats.get('total_samples', 0),
-                "Avg Question Length": f"{stats.get('avg_question_length', 0):.0f} chars",
-                "Avg Answer Length": f"{stats.get('avg_answer_length', 0):.0f} chars",
-                "Avg Citations": f"{stats.get('avg_citation_count', 0):.1f}",
-                "Avg Sentences": f"{stats.get('avg_sentence_count', 0):.1f}"
-            })
-        df_overview = pd.DataFrame(overview_data)
-        render_table(df_overview, hide_index=True)
-    else:
-        st.warning(" No available dataset.")
-    
     table_style = """
     <style>
     .booktabs-table {
@@ -363,33 +345,6 @@ def show_home_page():
     </style>
     """
     st.markdown(table_style, unsafe_allow_html=True)
-    st.markdown("#### Comparison among EviBook, LongBench-Cite, and ALCE")
-    st.markdown(
-        """
-        <table class="booktabs-table">
-            <thead>
-                <tr>
-                    <th>Aspect</th>
-                    <th>EviBook</th>
-                    <th>LongBench-Cite</th>
-                    <th>ALCE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Realistic textbook corpus</td><td>Yes</td><td>No</td><td>No</td></tr>
-                <tr><td>Long context (&gt;100K tokens)</td><td>Yes</td><td>No</td><td>No</td></tr>
-                <tr><td>Sentence-aligned citation supervision</td><td>Yes</td><td>No</td><td>No</td></tr>
-                <tr><td>Chunk-level citation granularity</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-                <tr><td>Dependence on strong proprietary LLMs</td><td>No</td><td>Yes</td><td>No</td></tr>
-            </tbody>
-        </table>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        "与基于基准的语料库不同，EviBook 是由真实的教科书材料构建而成，"
-        "更好地反映了特定领域的阅读和证据基础场景。"
-    )
     st.markdown("#### Statistics of EviBook domains")
     st.markdown(
         """
@@ -428,6 +383,50 @@ def show_home_page():
         """,
         unsafe_allow_html=True,
     )
+    st.markdown("#### Comparison among EviBook, LongBench-Cite, and ALCE")
+    st.markdown(
+        """
+        <table class="booktabs-table">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>EviBook</th>
+                    <th>LongBench-Cite</th>
+                    <th>ALCE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Realistic textbook corpus</td><td>Yes</td><td>No</td><td>No</td></tr>
+                <tr><td>Long context (&gt;100K tokens)</td><td>Yes</td><td>No</td><td>No</td></tr>
+                <tr><td>Sentence-aligned citation supervision</td><td>Yes</td><td>No</td><td>No</td></tr>
+                <tr><td>Chunk-level citation granularity</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+                <tr><td>Dependence on strong proprietary LLMs</td><td>No</td><td>Yes</td><td>No</td></tr>
+            </tbody>
+        </table>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "与基于基准的语料库不同，EviBook 是由真实的教科书材料构建而成，"
+        "更好地反映了特定领域的阅读和证据基础场景。"
+    )
+    domains = st.session_state.dataset_manager.get_domains()
+    if domains:
+        overview_data = []
+        for domain in domains:
+            stats = st.session_state.dataset_manager.get_dataset_stats(domain)
+            overview_data.append({
+                "Domain": domain.title(),
+                "Sample Count": stats.get('total_samples', 0),
+                "Avg Question Length": f"{stats.get('avg_question_length', 0):.0f} chars",
+                "Avg Answer Length": f"{stats.get('avg_answer_length', 0):.0f} chars",
+                "Avg Citations": f"{stats.get('avg_citation_count', 0):.1f}",
+                "Avg Sentences": f"{stats.get('avg_sentence_count', 0):.1f}"
+            })
+        df_overview = pd.DataFrame(overview_data)
+        render_table(df_overview, hide_index=True)
+    else:
+        st.warning(" No available dataset.")
 
 def show_attribution_page(show_header=True):
     """Show attribution page."""
