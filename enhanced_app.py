@@ -337,6 +337,11 @@ def show_home_page():
         render_table(df_overview, hide_index=True)
     else:
         st.warning(" No available dataset.")
+    
+    st.image(
+        resolve_resource_path(os.path.join("resources", "statistics_of_evibook.png")),
+        width="stretch"
+    )
 
 def show_attribution_page(show_header=True):
     """Show attribution page."""
