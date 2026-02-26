@@ -342,13 +342,40 @@ def show_home_page():
         "与基于基准的语料库不同，EviBook 是由真实的教科书材料构建而成，"
         "更好地反映了特定领域的阅读和证据基础场景。"
     )
-    st.image(
-        resolve_resource_path(os.path.join("resources", "comparision_dataset.png")),
-        width="stretch"
+    st.markdown("#### Statistics of EviBook domains")
+    st.markdown(
+        "| Book domain | #data | Avg len (chars) | Avg len (tokens) |\n"
+        "|---|---:|---:|---:|\n"
+        "| agriculture | 600 | 691.1k | 150.2k |\n"
+        "| art | 600 | 568.0k | 123.5k |\n"
+        "| biography | 600 | 721.2k | 156.8k |\n"
+        "| biology | 600 | 551.7k | 119.9k |\n"
+        "| cooking | 600 | 650.8k | 141.5k |\n"
+        "| cs | 600 | 929.1k | 202.0k |\n"
+        "| fiction | 600 | 593.5k | 129.0k |\n"
+        "| fin | 600 | 213.0k | 46.3k |\n"
+        "| health | 600 | 622.9k | 135.4k |\n"
+        "| history | 600 | 836.6k | 181.9k |\n"
+        "| legal | 600 | 231.3k | 50.3k |\n"
+        "| literature | 600 | 561.6k | 122.1k |\n"
+        "| mathematics | 600 | 680.7k | 148.0k |\n"
+        "| mix | 600 | 43.1k | 9.4k |\n"
+        "| music | 600 | 702.6k | 152.7k |\n"
+        "| philosophy | 600 | 576.7k | 125.4k |\n"
+        "| physics | 600 | 488.4k | 106.2k |\n"
+        "| politics | 600 | 648.9k | 141.1k |\n"
+        "| psychology | 600 | 685.2k | 149.0k |\n"
+        "| technology | 600 | 653.1k | 142.0k |\n"
     )
-    st.image(
-        resolve_resource_path(os.path.join("resources", "statistics_of_evibook.png")),
-        width="stretch"
+    st.markdown("#### Comparison among EviBook, LongBench-Cite, and ALCE")
+    st.markdown(
+        "| Aspect | EviBook | LongBench-Cite | ALCE |\n"
+        "|---|:---:|:---:|:---:|\n"
+        "| Realistic textbook corpus | Yes | No | No |\n"
+        "| Long context (>100K tokens) | Yes | No | No |\n"
+        "| Sentence-aligned citation supervision | Yes | No | No |\n"
+        "| Chunk-level citation granularity | No | Yes | Yes |\n"
+        "| Dependence on strong proprietary LLMs | No | Yes | No |\n"
     )
 
 def show_attribution_page(show_header=True):
