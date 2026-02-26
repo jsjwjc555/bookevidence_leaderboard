@@ -338,6 +338,14 @@ def show_home_page():
     else:
         st.warning(" No available dataset.")
     
+    st.markdown(
+        "与基于基准的语料库不同，EviBook 是由真实的教科书材料构建而成，"
+        "更好地反映了特定领域的阅读和证据基础场景。"
+    )
+    st.image(
+        resolve_resource_path(os.path.join("resources", "comparision_dataset.png")),
+        width="stretch"
+    )
     st.image(
         resolve_resource_path(os.path.join("resources", "statistics_of_evibook.png")),
         width="stretch"
